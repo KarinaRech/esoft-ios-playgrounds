@@ -10,10 +10,10 @@
  */
 
 func challenge1(input: String) -> Bool {
-  // yor code goes here...
-  // dont forget override return
-  return false
+  let uniqueChars = Set(input)
+  return uniqueChars.count == input.count
 }
+
 assert(challenge1(input: "No duplicates") == true, "Challenge 1 failed")
 assert(challenge1(input: "abcdefghijklmnopqrstuvwxyz") == true, "Challenge 1 failed")
 assert(challenge1(input: "AaBbCc") == true, "Challenge 1 failed")
@@ -32,9 +32,13 @@ assert(challenge1(input: "Hello, world") == false, "Challenge 1 failed")
  */
 
 func challenge2(input: String, count: Character) -> Int {
-  // yor code goes here...
-  // dont forget override return
-  return 0
+  var occurances = 0
+  input.forEach { char in
+    if char == count {
+      occurances = occurances + 1
+    }
+  }
+  return occurances
 }
 
 assert(challenge2(input: "The rain in Spain", count: "a") == 2, "Challenge 2 failed")
@@ -53,9 +57,9 @@ assert(challenge2(input: "Mississippi", count: "i") == 4, "Challenge 2 failed")
 */
 
 func challenge3(input: String) -> String {
-  // yor code goes here...
-  // dont forget override return
-  return ""
+  return input.split(separator: " ").map { word in
+    return String(word.reversed())
+  }.joined(separator: " ")
 }
 
 assert(challenge3(input: "Swift Coding Challenge") == "tfiwS gnidoC egnellahC", "Challenge 3 failed")

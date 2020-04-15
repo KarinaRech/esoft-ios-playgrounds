@@ -7,10 +7,13 @@
 
 extension Collection where Iterator.Element == Int {
   func challenge1() -> Double? {
-    
-    // yor code goes here...
-    // dont forget override return
-    return nil
+    guard !self.isEmpty else { return nil }
+    let arr = Array(self)
+    if self.count % 2 == 1 {
+      return Double(arr[self.count / 2])
+    } else {
+      return Double(arr[self.count / 2 - 1] + arr[self.count / 2]) / 2
+    }
   }
 }
 
@@ -33,9 +36,7 @@ assert([Int]().challenge1() == nil, "Challenge 1 failed")
  */
 
 func challenge2(input: [Int]) -> [Int] {
-  // yor code goes here...
-  // dont forget override return
-  return []
+  return Set(Array(1...100)).symmetricDifference(Set(input)).sorted()
 }
 
 var testArray = Array(1...100)
@@ -57,8 +58,18 @@ assert(challenge2(input: testArray) == [7, 21, 26], "Challenge 2 failed")
  Hint #4: Стоит использовать rethrows, чтобы не раздражать пользователей, которые используют non-throwing функции
  */
 
+extension Array {
+  func challenge3<T>(_ transform: (Element) -> T) -> [T] {
+    var result = [T]()
+    for item in self {
+      result.append(transform(item))
+    }
+    return result
+  }
+}
+
 // расскомментируйте aasert когда напишите метод challenge3
-// assert([1, 2, 3].challenge3 { String($0) } == ["1", "2", "3"], "Challenge 3 failed")
-// assert(["1", "2", "3"].challenge3 { Int($0)! } == [1, 2, 3], "Challenge 3 failed")
+assert([1, 2, 3].challenge3 { String($0) } == ["1", "2", "3"], "Challenge 3 failed")
+assert(["1", "2", "3"].challenge3 { Int($0)! } == [1, 2, 3], "Challenge 3 failed")
 
 

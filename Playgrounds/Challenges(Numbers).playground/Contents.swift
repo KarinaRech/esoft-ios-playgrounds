@@ -7,9 +7,12 @@
  */
 
 func challenge1(number: Int, power: Int) -> Int {
-  // yor code goes here...
-  // dont forget override return
-  return 0
+  precondition(number > 0 && power > 0)
+  var result = number
+  for _ in 1..<power {
+    result = result * number
+  }
+  return result
 }
 
 assert(challenge1(number: 4, power: 3) == 64, "Challenge 1 failed")
@@ -31,9 +34,11 @@ assert(challenge1(number: 2, power: 8) == 256, "Challenge 1 failed")
  */
 
 func challenge2(number: UInt) -> UInt {
-  // yor code goes here...
-  // dont forget override return
-  return UInt.min
+  let binaryString = String(number, radix: 2)
+  let reversed = String(binaryString.reversed())
+  let padding = 8 - reversed.count % 8
+  let result = reversed + String(repeating: "0", count: padding)
+  return UInt(result, radix: 2)!
 }
 
 // 32 это 100000 в бинарном представлении, дополним до 8 - 00100000. Отраженная последовательность - 00000100, что представляет собой - 4
@@ -56,9 +61,7 @@ assert(challenge2(number: 4) == 32, "Challenge 2 failed")
  */
 
 func challenge3(subtract: Int, from: Int) -> Int {
-  // yor code goes here...
-  // dont forget override return
-  return 0
+  return ~(subtract + ~from)
 }
 
 assert(challenge3(subtract: 5, from: 9) == 4, "Challenge 3 failed")
